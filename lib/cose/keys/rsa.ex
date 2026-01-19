@@ -84,6 +84,11 @@ defmodule COSE.Keys.RSA do
 end
 
 defimpl COSE.Keys.Key, for: COSE.Keys.RSA do
+  alias COSE.Keys.RSA
+   def generate(key) do
+   RSA.generate(key.alg)
+  end
+
   def sign(key, digest_type, to_be_signed) do
     private_key =
       [key.e, key.n, key.d]

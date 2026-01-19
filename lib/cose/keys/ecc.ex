@@ -21,6 +21,27 @@ defmodule COSE.Keys.ECC do
     }
   end
 
+  @spec from_record(
+          {:ECPrivateKey, any(), any(),
+           {:namedCurve, {1, 3, 132, 0, 34} | {1, 2, 840, 10045, 3, 1, 7}},
+           :undefined | bitstring(), any()}
+        ) :: %COSE.Keys.ECC{
+          alg: :es256 | :es384,
+          base_iv: nil,
+          crv: :p256 | :p384,
+          d: any(),
+          key_ops: nil,
+          kid: nil,
+          kty: :ecc,
+          pem_record:
+            {:ECPrivateKey, any(), any(),
+             {:namedCurve,
+              {any(), any(), any(), any(), any()}
+              | {any(), any(), any(), any(), any(), any(), any()}}, :undefined | bitstring(),
+             any()},
+          x: <<_::64, _::_*8>>,
+          y: <<_::64, _::_*8>>
+        }
   def from_record(pem_record) do
     {:ECPrivateKey, _, priv_d, {:namedCurve, oid}, pub_bits, _} = pem_record
 
@@ -99,6 +120,11 @@ end
 
 defimpl COSE.Keys.Key, for: COSE.Keys.ECC do
   alias COSE.Keys.ECC
+
+
+  def generate(key) do
+   ECC.generate(key.alg)
+  end
 
   def sign(key, digest_type, to_be_signed) do
     curve = ECC.curve(key)
