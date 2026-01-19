@@ -1,4 +1,5 @@
 defprotocol COSE.Keys.Key do
+  def generate(alg)
   def sign(key, digest_type, to_be_signed)
   def verify(key, digest_type, to_be_verified, signature)
 end
@@ -10,6 +11,8 @@ defmodule COSE.Keys do
 
   @oid_rsa {1, 2, 840, 113_549, 1, 1, 1}
   @oid_ec {1, 2, 840, 10045, 2, 1}
+
+  def generate(alg), do: Key.generate(alg)
 
   def sign(key, digest_type, to_be_signed), do: Key.sign(key, digest_type, to_be_signed)
 

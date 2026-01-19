@@ -39,12 +39,12 @@ defmodule COSE do
     es512: -36,
     rs256: -257,
     rs384: -258,
-    aes_128_cbc: -17760703,
-    aes_128_ctr: -17760704,
-    aes_256_cbc: -17760705,
-    aes_256_ctr: -17760706,
-    epid10: -2000810,
-    epid11: -2000811
+    aes_128_cbc: -17_760_703,
+    aes_128_ctr: -17_760_704,
+    aes_256_cbc: -17_760_705,
+    aes_256_ctr: -17_760_706,
+    epid10: -2_000_810,
+    epid11: -2_000_811
   }
 
   def algorithm(alg), do: Map.get(@cose_algs, alg, alg)
