@@ -26,6 +26,7 @@ end
 
 defimpl COSE.Keys.Key, for: COSE.Keys.OKP do
   alias COSE.Keys.OKP
+
   def sign(key, digest_type, to_be_signed) do
     :crypto.sign(:eddsa, digest_type, to_be_signed, [key.d, :ed25519])
   end
@@ -35,6 +36,6 @@ defimpl COSE.Keys.Key, for: COSE.Keys.OKP do
   end
 
   def generate(_) do
-   OKP.generate(:enc)
+    OKP.generate(:enc)
   end
 end

@@ -121,9 +121,8 @@ end
 defimpl COSE.Keys.Key, for: COSE.Keys.ECC do
   alias COSE.Keys.ECC
 
-
   def generate(key) do
-   ECC.generate(key.alg)
+    ECC.generate(key.alg)
   end
 
   def sign(key, digest_type, to_be_signed) do
